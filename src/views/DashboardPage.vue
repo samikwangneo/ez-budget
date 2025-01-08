@@ -7,9 +7,24 @@ import Navbar from '@/components/TheNavbar.vue';
 <template>
   <div>
     <Navbar />
-    <h1>Welcome to the Dashboard!</h1>
+    <div class="container">
+      <div class="title">Welcome to the Dashboard!</div>
+    </div>
   </div>
 </template>
 
+<style scoped>
 
+.title {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+</style>
 
