@@ -1,5 +1,75 @@
 <!-- src/views/LoginSignup.vue -->
 
+<script setup>
+
+import { ref } from 'vue';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+
+const email = ref("");
+const password = ref("");
+const errMsg = ref();
+const signin_email = ref("");
+const signin_password = ref("");
+const router = useRouter();
+
+const register = () => {
+  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+    .then((data) => {
+      console.log("Successfully registered!");
+      router.push('/dashboard')
+    })
+
+    .catch((error) => {
+      console.log(error.code);
+      alert(error.message);
+    });
+}
+
+const signIn = () => {
+  signInWithEmailAndPassword(getAuth(), signin_email.value, signin_password.value)
+    .then((data) => {
+      console.log("Successfully Signed In!");
+      router.push('/dashboard')
+    })
+
+    .catch((error) => {
+      console.log(error.code);
+      console.log(email.value);
+      console.log(password.value);
+      switch (error.code) {
+        case "auth/invalid-email":
+          errMsg.value = "Invalid email";
+          break;
+        case "auth/user-not-found":
+          errMsg.value = "No account with that email was found";
+          break;
+        case "auth/wrong-password":
+          errMsg.value = "Incorrect password";
+          break;
+        default:
+          errMsg.value = "Email or password was incorrect";
+          break;
+      }
+    });
+
+}
+
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+    .then((result) => {
+    console.log(result.user);
+    router.push("/dashboard");
+    })
+    .catch((error) => {
+      console.log(error.code);
+    });
+}
+
+
+</script>
+
 <script>
 export default {
   methods: {
@@ -8,6 +78,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <template>
@@ -24,15 +95,16 @@ export default {
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Log In</h4>
+                      <div class="err-msg" v-if="errMsg">{{ errMsg }}</div>
 											<div class="form-group">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<input type="email" v-model="signin_email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
 												<i class="input-icon uil uil-at"></i>
 											</div>
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<input type="password" v-model="signin_password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											  <RouterLink to="/dashboard" class="btn mt-4">submit</RouterLink>
+											  <button class="btn mt-4" @click="signIn">submit</button>
                           <p class="mb-0 mt-4 text-center">
                             <a href="#0" class="link" @click="showAlert">Forgot your password?</a>
                           </p>
@@ -43,19 +115,20 @@ export default {
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
+                      <img src="../../public/sign_w_google.png" class="goog" @click="signInWithGoogle"></img>
 											<div class="form-group">
 												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
 												<i class="input-icon uil uil-user"></i>
 											</div>
 											<div class="form-group mt-2">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<input type="email" v-model="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
 												<i class="input-icon uil uil-at"></i>
 											</div>
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<input type="password"v-model="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<RouterLink to="/dashboard" class="btn mt-4">submit</RouterLink>
+                      <button class="btn mt-4" @click="register">submit</button>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -81,6 +154,28 @@ export default {
   left: 0;
   position: fixed;
   background-color: var(--color-background);
+}
+
+.goog {
+  height: 100px;
+  width: 230px;
+  margin-top: -50px;
+  transition: transform 0.3s ease;
+}
+
+.goog:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.goog:active {
+  transform: scale(0.95);
+}
+
+.err-msg {
+  color: #fa7373;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
 
 body{
@@ -173,7 +268,7 @@ h6 span{
   position: relative;
   width: 440px;
   max-width: 100%;
-  height: 400px;
+  height: 420px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 800px;
@@ -313,14 +408,13 @@ h6 span{
     transition: all 200ms linear;
 }
 
-.btn{
-  border-radius: 4px;
+.btn {
+  border-radius: 40px;
   height: 44px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-  -webkit-transition : all 200ms linear;
-  transition: all 200ms linear;
+  transition : background-color 200ms linear, transform 0.3s ease;
   padding: 0 30px;
   letter-spacing: 1px;
   display: -webkit-inline-flex;
@@ -341,16 +435,16 @@ h6 span{
   color: var(--color-background);
   box-shadow: 0 8px 24px 0 rgba(134,194,50,.2);
 }
-.btn:active,
-.btn:focus{
-  background-color: var(--color-gray);
-  color: var(--color-green);
-  box-shadow: 0 8px 24px 0 rgba(134,194,50,.2);
-}
+
 .btn:hover{
   background-color: var(--color-gray);
   color: var(--color-green);
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  transform: scale(1.1);
+}
+
+.btn:active {
+  transform: scale(0.95);
 }
 
 </style>

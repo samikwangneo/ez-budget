@@ -24,22 +24,7 @@ const goToLoginSignup = () => {
 
 <template>
   <div class="landing-page">
-    <nav class="navbar">
-      <div class="nav-left">
-        <RouterLink to="/">
-          <img src="../../public/logo.png" alt="Logo" class="nav-logo" />
-        </RouterLink>
-        <RouterLink to="/" class="nav-home">Budget</RouterLink>
-      </div>
-
-      <div class="nav-right">
-        <RouterLink to="/" class="nav-item" @click='showAlert'>Dashboard</RouterLink>
-        <RouterLink to="/" class="nav-item" @click='showAlert'>Budget</RouterLink>
-        <RouterLink to="/" class="nav-item" @click='showAlert'>Analytics</RouterLink>
-        <RouterLink to="/" class="nav-item" @click='showAlert'>Account</RouterLink>
-      </div>
-    </nav>
-
+    <Navbar />
     <div class="content">
       <h1 class="animate__animated animate__bounceInDown">Get started with EZ budget</h1>
       <div class = "animate__animated animate__bounceInUp animate__delay-2s">
@@ -76,7 +61,7 @@ const goToLoginSignup = () => {
   color: white;
   background-color: var(--color-green-mute);
   border: none;
-  border-radius: 8px;
+  border-radius: 40px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
