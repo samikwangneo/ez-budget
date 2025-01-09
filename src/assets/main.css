@@ -1,9 +1,6 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
 }
 
@@ -25,11 +22,15 @@ a,
   body {
     display: flex;
     place-items: center;
+    justify-content:center;
+    align-items: center;
   }
 
   #app {
     display: grid;
-    padding: 0 2rem;
   }
 }
 
+body {
+    background-color: var(--color-background);
+}

@@ -1,16 +1,14 @@
-<!-- src/views/Dashboard.vue -->
+<!-- src/views/DashboardPage.vue -->
 
 <script setup>
 import Navbar from '@/components/TheNavbar.vue';
 </script>
 
 <template>
-  <div>
-    <Navbar />
     <div class="container">
+      <Navbar />
       <div class="title">Welcome to the Dashboard!</div>
     </div>
-  </div>
 </template>
 
 <style scoped>
@@ -18,6 +16,7 @@ import Navbar from '@/components/TheNavbar.vue';
 .title {
   font-size: 40px;
   font-weight: 600;
+  color: var(--color-heading);
 }
 
 .container {
@@ -27,4 +26,5 @@ import Navbar from '@/components/TheNavbar.vue';
 }
 
 </style>
+
 

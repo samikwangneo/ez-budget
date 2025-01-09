@@ -1,11 +1,12 @@
-<script setup>
-import { useRouter } from 'vue-router';
+<!-- src/views/LoginSignup.vue -->
 
-const router = useRouter(); // Get the router instance
-
-// Function to handle button click
-const goToLanding = () => {
-  router.push('/'); // Navigate to the /loginsignup route
+<script>
+export default {
+  methods: {
+    showAlert() {
+      alert('Sounds like a you problem bud');
+    }
+  }
 };
 </script>
 
@@ -31,8 +32,10 @@ const goToLanding = () => {
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<RouterLink to="/" class="btn mt-4">submit</RouterLink>
-                            				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+											  <RouterLink to="/dashboard" class="btn mt-4">submit</RouterLink>
+                          <p class="mb-0 mt-4 text-center">
+                            <a href="#0" class="link" @click="showAlert">Forgot your password?</a>
+                          </p>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -52,7 +55,7 @@ const goToLanding = () => {
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a href="#" class="btn mt-4" @click="goToLanding">submit</a>
+											<RouterLink to="/dashboard" class="btn mt-4">submit</RouterLink>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -77,7 +80,7 @@ const goToLanding = () => {
   top: 0;
   left: 0;
   position: fixed;
-  background-color: #1f2029;
+  background-color: var(--color-background);
 }
 
 body{
@@ -114,7 +117,7 @@ h6 span{
   padding: 0 20px;
   text-transform: uppercase;
   font-weight: 700;
-  color: #c4c3ca;
+  color: var(--color-text);
 }
 .section{
   position: relative;
@@ -140,7 +143,7 @@ h6 span{
   padding: 0;
   margin: 10px auto;
   cursor: pointer;
-  background-color: #ffeba7;
+  background-color: var(--color-green);
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before{
@@ -149,8 +152,8 @@ h6 span{
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #ffeba7;
-  background-color: #102770;
+  color: var(--color-green);
+  background-color: var(--color-gray);
   font-family: 'unicons';
   content: '\1F86C';
   z-index: 20;
@@ -189,8 +192,7 @@ h6 span{
 .card-front, .card-back {
   width: 100%;
   height: 100%;
-  background-color: #2a2b38;
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+  background-color: var(--color-login-gray);
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: 300%;
@@ -261,7 +263,7 @@ h6 span{
   font-size: 24px;
   line-height: 48px;
   text-align: left;
-  color: #ffeba7;
+  color: var(--color-green);
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
@@ -335,19 +337,19 @@ h6 span{
   -ms-flex-pack: center;
   text-align: center;
   border: none;
-  background-color: #ffeba7;
-  color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+  background-color: var(--color-green);
+  color: var(--color-background);
+  box-shadow: 0 8px 24px 0 rgba(134,194,50,.2);
 }
 .btn:active,
 .btn:focus{
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  background-color: var(--color-gray);
+  color: var(--color-green);
+  box-shadow: 0 8px 24px 0 rgba(134,194,50,.2);
 }
 .btn:hover{
-  background-color: #102770;
-  color: #ffeba7;
+  background-color: var(--color-gray);
+  color: var(--color-green);
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 

@@ -1,13 +1,16 @@
 <!-- src/components/TheNavbar.vue -->
 
 <script setup>
-import { RouterLink } from 'vue-router';
+
 </script>
 
 <template>
   <nav class="navbar">
     <div class="nav-left">
-      <RouterLink to="/" class="nav-item">Home</RouterLink>
+      <RouterLink to="/dashboard">
+        <img src="../../public/logo.png" alt="Logo" class="nav-logo" />
+      </RouterLink>
+      <RouterLink to="/dashboard" class="nav-home">Budget</RouterLink>
     </div>
 
     <div class="nav-right">
@@ -20,46 +23,47 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style scoped>
-/* Navbar Styling */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
-  background: linear-gradient(90deg, #373737 0%, #42b983 100%);
-  color: white;
+  height: 60px;
+  background: linear-gradient(90deg, var(--color-green-mute) 20%, var(--color-green) 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
+  transition: background 1s ease, height 0.5s ease;
 }
 
-/* Navbar Right Section */
 .nav-right {
   display: flex;
   gap: 2rem;
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
 .nav-item {
   text-decoration: none;
-  color: white;
+  color: var(--color-heading);
   font-size: 1.2rem;
   padding: 8px 16px;
   border-radius: 8px;
   position: relative;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Hover Effect on Links */
 .nav-item:hover {
   background-color: #42b983;
-  transform: translateY(-4px); /* Slight lift effect */
+  transform: translateY(-4px);
 }
 
-/* Underline Effect for Links */
 .nav-item::after {
   content: '';
   position: absolute;
@@ -76,13 +80,25 @@ import { RouterLink } from 'vue-router';
   left: 0;
 }
 
-/* Remove margin-right for last link */
 .nav-right a:last-child {
   margin-right: 0;
 }
 
-/* Navbar Hover Effect */
 .navbar:hover {
-  background: linear-gradient(90deg, #333333 0%, #4caf50 100%);
+  background: linear-gradient(90deg, #72a137 20%, #90d134 100%);
+  height: 80px;
+}
+
+.nav-logo {
+  width: 60px;
+  height: auto;
+  margin-left: -20px;
+}
+
+.nav-home {
+  color: var(--color-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+
 }
 </style>
