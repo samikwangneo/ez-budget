@@ -83,7 +83,7 @@ router.beforeEach(async(to, from, next) => {
       next();
     }
     else {
-      alert("Login or signup first lil bro ROUTER");
+      alert("Login or signup first lil bro");
       next("/")
     }
   }
