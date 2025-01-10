@@ -10,7 +10,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDuviZ0N6TUPAKy-cmaYyThSgQu8R5AYG4",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "ez-budget-b00dd.firebaseapp.com",
   projectId: "ez-budget-b00dd",
   storageBucket: "ez-budget-b00dd.firebasestorage.app",

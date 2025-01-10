@@ -17,6 +17,7 @@
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
     "bulma": "^1.0.3",
+    "dotenv": "^16.4.7",
     "firebase": "^11.1.0",
     "jquery": "^3.7.1",
     "localforage": "^1.10.0",
