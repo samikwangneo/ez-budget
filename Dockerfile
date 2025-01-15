@@ -22,9 +22,7 @@ COPY --from=build-stage /app/vite.config.js ./
 RUN npm ci --only=production
 
 ENV PORT=8080
-ENV APP_PORT=8000
 
 EXPOSE 8080
-EXPOSE 8000
 
 CMD [ "node", "server.cjs" ]

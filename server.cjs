@@ -10,7 +10,6 @@ const bodyParser = require('body-parser');
 const moment = require('moment');
 const cors = require('cors');
 
-const APP_PORT = 8000;
 const port = process.env.PORT || 8080;
 const PLAID_CLIENT_ID = process.env.VITE_PLAID_CLIENT_ID;
 const PLAID_SECRET = process.env.VITE_PLAID_SECRET;
@@ -21,15 +20,11 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // PLAID_PRODUCTS is a comma-separated list of products to use when initializing
 // Link. Note that this list must contain 'assets' in order for the app to be
 // able to create and retrieve asset reports.
-const PLAID_PRODUCTS = (Products.Transactions).split(
-  ',',
-);
+const PLAID_PRODUCTS = ('auth,transactions,assets').split(',');
 
 // PLAID_COUNTRY_CODES is a comma-separated list of countries for which users
 // will be able to select institutions from.
-const PLAID_COUNTRY_CODES = ('US').split(
-  ',',
-);
+const PLAID_COUNTRY_CODES = ('US').split(',');
 
 // Parameters used for the OAuth redirect Link flow.
 //
@@ -560,8 +555,8 @@ app.get('/api/income/verification/paystubs', function (request, response, next) 
     .catch(next);
 })
 
-const server = app.listen(APP_PORT, function () {
-  console.log('plaid-quickstart server listening on port ' + APP_PORT);
+const server = app.listen(port, function () {
+  console.log('plaid-quickstart server listening on port ' + port);
 });
 
 const prettyPrintResponse = (response) => {
