@@ -11,6 +11,7 @@ const moment = require('moment');
 const cors = require('cors');
 
 const APP_PORT = 8000;
+const port = process.env.PORT || 8080;
 const PLAID_CLIENT_ID = process.env.VITE_PLAID_CLIENT_ID;
 const PLAID_SECRET = process.env.VITE_PLAID_SECRET;
 const PLAID_ENV = 'sandbox';
@@ -84,6 +85,11 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static('dist'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 app.post('/api/info', function (request, response, next) {
   response.json({
