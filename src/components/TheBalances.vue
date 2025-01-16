@@ -6,7 +6,7 @@ const transactions = ref([]);
 const error = ref(null);
 const isLoading = ref(false);
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://ezbudget.org';
 
 const fetchAccounts = async () => {
   try {
